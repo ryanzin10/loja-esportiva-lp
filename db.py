@@ -75,6 +75,6 @@ def consultarProduto():
                     
             
             novoProduto = input('Consultar novo produto (s/n)? ').lower()
-            if novoProduto == 'n':
+            if novoProduto == 'n': 
                 break
         dbp.close()
