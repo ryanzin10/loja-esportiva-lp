@@ -1,11 +1,11 @@
 import db
 
 while True:
+    db.limpaTerminal()
     options = input('=======================\n[1] Venda\n[2] Produto\n[3] Cliente\n[4] Sair\n=======================\nOpção desejada: ')
 
     #Venda
     if options == '1':
-        data.limpaTerminal()
         while True:
             optionVenda = input('\n=======================\n1. Adicionar produto ao carrinho\n2. Verificar carrinho\n3. Concluir venda\n4. Voltar\n=======================\nOpção desejada: ')
             
@@ -25,18 +25,18 @@ while True:
     #Produto
     elif options == '2':
         while True:
-            optionProduto = input('\n=======================\n[1] Consultar produto\n[2] Cadastrar produto\n[3] Excluir produto\n[4] Voltar\n=======================\nOpção desejada: ')
+            db.limpaTerminal()
+            optionProduto = input('\n=======================\n[1] Consultar produto\n[2] Cadastrar produto\n[3] Alterar produto\n[4] Excluir produto\n[4] Voltar\n=======================\nOpção desejada: ')
             
             if optionProduto == '1':
-                print()
+                db.consultarProduto()
             
-
 
             elif optionProduto == '2':
                 db.cadastrarProduto()
 
             elif optionProduto == '3':
-                print("")    
+                db.alterarProduto()
             
             elif optionProduto == '4':
                 break
