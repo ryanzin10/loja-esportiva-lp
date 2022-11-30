@@ -27,6 +27,7 @@ def cadastrarProduto():
             produto[x] = input(x + ': ')
             with open("dbprodutos.txt", "a", encoding="utf8") as dbp:
                 dbp.write(str(produto[x]) + '\n')
+            dbp.close()
 
         novoProduto = input('Cadastrar novo produto (s/n)? ').lower()
         if novoProduto == 'n':
@@ -60,11 +61,17 @@ def consultarProduto():
         with open('dbprodutos.txt', 'r', encoding='utf8') as dbp:
             #Colocando dados do .txt em uma lista
             produtos = dbp.readlines() 
+            #Percorrendo lista
             for x in range(len(produtos)):
-                if produtos[x] == chave + '\n':
+                #Encontrando código de barras digitado pelo usuário
+                encontrou = False
+                if produtos[x] == chave + '\n' and (x+5)%5 == 0:
                     print(f"\nNome: {produtos[x+1]}Descrição: {produtos[x+2]}Preço: {produtos[x+3]}Quantidade em estoque: {produtos[x+4]}Código de barras: {produtos[x]}")
-                elif chave + '\n' not in produtos and x == len(produtos) - 1:
-                    print("Esse produto não está cadastrado no banco de dados!")
+                    encontrou = True
+                    break
+                #Caso o código digitado não exista no banco
+                elif x == len(produtos) - 1 and encontrou == False:
+                    print("\nEsse produto não está cadastrado no banco de dados!\n")
                     
             
             novoProduto = input('Consultar novo produto (s/n)? ').lower()
