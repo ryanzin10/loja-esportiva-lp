@@ -41,18 +41,37 @@ def alterarProduto():
         limpaTerminal()
 
         chave = input("Digite o código de barras: ")
-        campo = input("Qual campo deseja alterar:\n[1] Nome\n[2] Descrição\n[3] Preço\n[4] Quantidade em estoque\n\n")
+        campo = input("[1] Nome\n[2] Descrição\n[3] Preço\n[4] Quantidade em estoque\n[0] Voltar\n\nQual campo deseja alterar: ")
+        novo = input("Digite o novo valor: ")
 
         with open('dbprodutos.txt', 'r') as dbp:
             produtos = dbp.readlines()
-            for x in range(len(produtos)):
-                if produtos[x] == produto + '\n':
-                    print(f"\nNome: {produtos[x+1]}Descrição: {produtos[x+2]}Preço: {produtos[x+3]}Quantidade em estoque: {produtos[x+4]}Código de barras: {produtos[x]}")
-            
-            novoProduto = input('Consultar novo produto (s/n)? ').lower()
+        dbp.close()
+         
+        for x in range(len(produtos)):
+            if produtos[x] == chave + '\n' and (x+5)%5 == 0:
+                with open('dbprodutos.txt', 'w') as dbp:
+                    if campo == '1':
+                        produtos[x+1] = novo + '\n'
+                        print("\nNome alterado!\n")
+                        for y in produtos:
+                            dbp.write(y)
+                        break
+
+                    elif campo == '2':
+                        produtos[x+2] = novo + '\n'
+                        for y in produtos:
+                            dbp.write(y)
+                        break
+                dbp.close()
+
+            elif x == len(produtos) - 1:
+                    print("\nEsse produto não está cadastrado no banco de dados!\n")
+
+            novoProduto = input('Alterar novo produto (s/n)? ').lower()
             if novoProduto == 'n':
                 break
-        dbp.close()
+       
 
 #Consulta de produto
 def consultarProduto():
