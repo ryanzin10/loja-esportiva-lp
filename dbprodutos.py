@@ -6,6 +6,7 @@ category = {
     '3': {'name': 'Meia', 'sub': {'1': {'tipo': 'Cano alto'}, '2': {'tipo': 'Cano baixo'}}}
 }
 '''
+#Dicionário com informações do produto
 produto = {
         "Código de barras": "",
         "Nome": "",
@@ -18,21 +19,23 @@ produto = {
 def limpaTerminal():
     os.system('cls' if os.name == 'nt' else clear)
 
-
+#Cadastro de produto
 def cadastrarProduto():
     while True:
         limpaTerminal()
-        
+
+        #Adicionando valores aos atributos de produto
         for x in produto:
             produto[x] = input(x + ': ')
             with open("dbprodutos.txt", "a", encoding="utf8") as dbp:
                 dbp.write(str(produto[x]) + '\n')
             dbp.close()
-
+        
         novoProduto = input('Cadastrar novo produto (s/n)? ').lower()
         if novoProduto == 'n':
             break
 
+#Alteração de produto
 def alterarProduto():
     while True:
         limpaTerminal()
@@ -51,26 +54,26 @@ def alterarProduto():
                 break
         dbp.close()
 
-
+#Consulta de produto
 def consultarProduto():
     while True:
         limpaTerminal()
-        #Chave primária do produto
+        #Chave primária do produto, no caso o Código de barras
         chave = input("Digite o código de barras: ") 
-
+        #Abrindo o arquivo em modo leitura
         with open('dbprodutos.txt', 'r', encoding='utf8') as dbp:
             #Colocando dados do .txt em uma lista
             produtos = dbp.readlines() 
             #Percorrendo lista
             for x in range(len(produtos)):
                 #Encontrando código de barras digitado pelo usuário
-                encontrou = False
+                
                 if produtos[x] == chave + '\n' and (x+5)%5 == 0:
                     print(f"\nNome: {produtos[x+1]}Descrição: {produtos[x+2]}Preço: {produtos[x+3]}Quantidade em estoque: {produtos[x+4]}Código de barras: {produtos[x]}")
-                    encontrou = True
+                    
                     break
                 #Caso o código digitado não exista no banco
-                elif x == len(produtos) - 1 and encontrou == False:
+                elif x == len(produtos) - 1:
                     print("\nEsse produto não está cadastrado no banco de dados!\n")
                     
             
