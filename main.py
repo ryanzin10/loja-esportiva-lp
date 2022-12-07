@@ -48,13 +48,14 @@ while True:
             
             #Excluir produto
             elif optionProduto == '4':
-                break
+                dbprodutos.excluirProduto()
 
             #Voltar
             elif optionProduto == '0':
                 break
             else:
                 print('Opção inválida!')
+                time.sleep(3)
     
     #CLiente
     elif options == '3':
@@ -67,11 +68,11 @@ while True:
     #Sair
     elif options == '0':
         print('\nSaindo...')
-        time.sleep(2)
+        time.sleep(3)
         dbprodutos.limpaTerminal()
         break
 
     else:
         print('\nDigite uma alternativa válida!')
-        time.sleep(2)
+        time.sleep(3)
                 

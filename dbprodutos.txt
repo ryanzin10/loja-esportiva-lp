@@ -1,40 +1,5 @@
-123123
-Chuteira Nike
-Campo
-299.99
-499
-123124
-Luva
-De pedreiro
-40
-23
-123125
-Chuteira
-Society
-199
-12
 111111
-Chuteira
-Futsal
-199.99
-10
-000000
-Luva
-Macia nos dedos
-49.99
-100
-999999
-Caneleira
-Tamanho M
-30
-1299
-222222
-Joelheira
-Tamanho P
-23.87
-222222
-121212
-Caneleira
-Tamanho G
-99
-2
+Chuteira Nike
+Tamanho 38, vermelha
+229
+34
