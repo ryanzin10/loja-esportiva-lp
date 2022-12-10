@@ -1,5 +1,10 @@
 111111
 Chuteira Nike
-Tamanho 38, vermelha
+Número 39, vermelha
 229
 34
+222222
+Chuteira Adidas
+Número 40, verde
+199
+200

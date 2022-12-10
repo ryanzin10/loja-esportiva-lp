@@ -8,11 +8,12 @@ while True:
     #Venda
     if options == '1':
         while True:
+            dbprodutos.limpaTerminal()
             
             optionVenda = input('\n=======================\n[1] Adicionar produto ao carrinho\n[2] Verificar carrinho\n[3] Concluir venda\n[0] Voltar\n=======================\nOpção desejada: ')
             #Adicionar produto ao carrinho
             if optionVenda == '1':
-                addCarrinho = input('\nDigite o código de barras: ')
+                dbprodutos.addCarrinho()
             
             #Verificar carrinho
             elif optionVenda == '2':

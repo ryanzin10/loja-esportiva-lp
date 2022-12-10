@@ -1,12 +1,5 @@
 import os, time
-'''
-category = {
-    '1': {'name': 'Chuteira', 'sub': {'1': {'tipo': 'Campo'}, '2': {'tipo': 'Society'}, '3': {'tipo': 'Futsal'}}},
-    '2': {'name': 'Luva', 'sub': {'1': {'tipo': 'Flat'}, '2': {'tipo': 'Rollfinger'}}},
-    '3': {'name': 'Meia', 'sub': {'1': {'tipo': 'Cano alto'}, '2': {'tipo': 'Cano baixo'}}}
-}
-'''
-#Dicionário com informações do produto
+
 produto = {
         "Código de barras": "",
         "Nome": "",
@@ -14,6 +7,11 @@ produto = {
         "Preço": 0.0,
         "Quantidade em estoque": 0
     }
+
+#Quantidade de produtos
+qtd_prod = len(produto)
+
+#SESSÃO DE PRODUTOS
 
 #Limpar terminal
 def limpaTerminal():
@@ -47,7 +45,7 @@ def alterarProduto():
         dbp.close()
          
         for x in range(len(produtos)):
-            if produtos[x] == chave + '\n' and (x+5)%5 == 0:
+            if produtos[x] == chave + '\n' and (x+qtd_prod)%qtd_prod == 0:
                 campo = input("[1] Nome\n[2] Descrição\n[3] Preço\n[4] Quantidade em estoque\n[0] Voltar\n\nQual campo deseja alterar: ")
                 novo = input("\nDigite o novo valor: ")
 
@@ -108,7 +106,7 @@ def consultarProduto():
             for x in range(len(produtos)):
                 #Encontrando código de barras digitado pelo usuário
                 
-                if produtos[x] == chave + '\n' and (x+5)%5 == 0:
+                if produtos[x] == chave + '\n' and (x+qtd_prod)%qtd_prod == 0:
                     print(f"\nNome: {produtos[x+1]}Descrição: {produtos[x+2]}Preço: {produtos[x+3]}Quantidade em estoque: {produtos[x+4]}Código de barras: {produtos[x]}")
                     
                     break
@@ -134,7 +132,7 @@ def excluirProduto():
         dbp.close()
          
         for x in range(len(produtos)):
-            if produtos[x] == chave + '\n' and (x+5)%5 == 0:
+            if produtos[x] == chave + '\n' and (x+qtd_prod)%qtd_prod == 0:
                 excluir = input(f"\nDeseja excluir o/a {produtos[x+1].split()} (s/n)? ").lower()
                 if excluir == 's':
                     with open('dbprodutos.txt', 'w', encoding="utf8") as dbp:
@@ -154,3 +152,39 @@ def excluirProduto():
         novaAlt = input('Excluir outro produto (s/n)? ').lower()
         if novaAlt == 'n': 
             break
+
+
+#SESSÃO DE VENDAS
+carrinho = []
+def addCarrinho():
+    while True:
+        limpaTerminal()
+
+        chave = input("Digite o código de barras: ")
+        unidades = int(input("Quantas unidades: "))
+
+        with open('dbprodutos.txt', 'r', encoding="utf8") as dbp:
+            produtos = dbp.readlines()
+        dbp.close()
+
+        for x in range(len(produtos)):
+            if produtos[x] == chave + '\n' and (x+qtd_prod)%qtd_prod == 0:
+                add = input(f"Deseja adicionar {produtos[x+1]} ao carrinho (s/n)?").lower()
+                if add == 's':
+                    for x in range(unidades):
+                        for y in range(len(produto)):
+                            carrinho.append(produtos[x+y])
+                    
+
+
+
+def verCarrinho():
+    limpaTerminal()
+
+    print("Produtos no carrinho:\n\n")
+
+    for x in range(len(carrinho)):
+        if x > 0 and x%len(produto)!=0:
+            print(carrinho[x])
+
+#def comprar()
