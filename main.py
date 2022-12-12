@@ -62,7 +62,7 @@ while True:
     #CLiente
     elif options == '3':
         while True:
-            optionCliente = input('\n=======================\n[1] Consultar cliente\n[2] Cadastrar cliente\n[3] Excluir cliente\n[0] Voltar\n=======================\nOpção desejada: ')
+            optionCliente = input('\n=======================\n[1] Consultar cliente\n[2] Cadastrar cliente\n[3] Alterar cliente\n[3] Excluir cliente\n[0] Voltar\n=======================\nOpção desejada: ')
 
             if optionCliente == '2':
                 dbclientes.cadastrarCliente()

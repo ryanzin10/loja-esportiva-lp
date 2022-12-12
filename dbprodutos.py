@@ -237,8 +237,7 @@ def vender():
                     for i in produtos:
                         dbp.write(i)
                 dbp.close()
-
-            print("\nCompra finalizada!\n")
+            print("Compra finalizada!")
             time.sleep(3)
             break
         else:
