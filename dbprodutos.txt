@@ -1,10 +1,10 @@
 111111
-Chuteira Nike
-Número 39, vermelha
-229
-34
+Chuteira Umbro
+Número 40
+100
+5
 222222
 Chuteira Adidas
-Número 40, verde
-199
-200
+Número 41
+299
+2

@@ -1,4 +1,4 @@
-import dbprodutos, dbclientes, time
+import dbclientes, dbprodutos, time
 
 while True:
     dbprodutos.limpaTerminal()
@@ -17,10 +17,11 @@ while True:
             
             #Verificar carrinho
             elif optionVenda == '2':
-                print()
+                dbprodutos.verCarrinho()
             
             #Concluir venda
-            #elif optionVenda == '3':
+            elif optionVenda == '3':
+                dbprodutos.vender()
 
             #Voltar
             elif optionVenda == '0':
