@@ -56,6 +56,7 @@ def cadastrarCliente():
             #Se o cliente já estiver no banco...
             if x == "CPF" and cliente[x] + "\n" in clientes:
                 print("\nO Banco de Dados já possui esse cliente!\n")
+                break
 
             #Senão, adicione o novo cliente ao banco
             else:
@@ -63,7 +64,7 @@ def cadastrarCliente():
                     dbp.write(str(cliente[x]) + '\n')
                 dbp.close()
 
-        novoCliente = input('Cadastrar novo cliente (s/n)? ').lower()
+        novoCliente = input('\nCadastrar novo cliente (s/n)? ').lower()
         if novoCliente == 'n':
             break
 

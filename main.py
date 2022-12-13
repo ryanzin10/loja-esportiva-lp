@@ -64,6 +64,8 @@ while True:
     #CLiente
     elif options == '3':
         while True:
+            dbprodutos.limpaTerminal()
+            
             optionCliente = input('\n=======================\n[1] Consultar cliente\n[2] Cadastrar cliente\n[3] Alterar cliente\n[4] Excluir cliente\n[0] Voltar\n=======================\nOpção desejada: ')
 
             #Consultar cliente
