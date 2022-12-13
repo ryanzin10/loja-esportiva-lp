@@ -1,5 +1,10 @@
 111111
-Chuteira
-Numero 38
+Chuteira Adidas
+Numero 38, Palmilha removível
 300
-1884
+1855
+222222
+Chuteira Nike
+Número 40, Palmilha fixa
+499
+1977

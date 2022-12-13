@@ -8,6 +8,7 @@ cliente = {
         "Email": "",
         }
 
+#Quantidade de atributos
 qtd_cli = len(cliente)
 
 
@@ -16,6 +17,7 @@ def consultarCliente():
     while True:
         dbprodutos.limpaTerminal()
         
+        #
         chave = input("Digite o CPF: ") 
 
         #Abrindo o arquivo em modo leitura
@@ -42,43 +44,52 @@ def cadastrarCliente():
         dbprodutos.limpaTerminal()
 
         #Adicionando valores aos atributos de Cliente
-        y = 0
         for x in cliente:
+            #Adicionando valores aos atributos de cliente percorrendo dicionário
             cliente[x] = input(x + ': ')
 
+            #Passando informações do arquivo para uma lista
             with open("dbclientes.txt", "r", encoding="utf8") as dbp:
                 clientes = dbp.readlines()
             dbp.close()
 
-            if y==0 and cliente[x] in clientes:
+            #Se o cliente já estiver no banco...
+            if x == "CPF" and cliente[x] + "\n" in clientes:
                 print("\nO Banco de Dados já possui esse cliente!\n")
 
+            #Senão, adicione o novo cliente ao banco
             else:
                 with open("dbclientes.txt", "a", encoding="utf8") as dbp:
                     dbp.write(str(cliente[x]) + '\n')
                 dbp.close()
-            y = y+1
 
         novoCliente = input('Cadastrar novo cliente (s/n)? ').lower()
         if novoCliente == 'n':
             break
 
-    #Alteração de Cliente
+
+#Alteração de Cliente
 def alterarCliente():
     while True:
         dbprodutos.limpaTerminal()
 
+        #identificador do cliente
         chave = input("Digite o CPF: ")
 
+        #Passando informações do arquivo para uma lista
         with open('dbclientes.txt', 'r', encoding="utf8") as dbp:
             clientes = dbp.readlines()
         dbp.close()
-         
+        
+        #for para percorrer a lista de clientes de 5 em 5, assim pega só CPF
         for x in range(0, len(clientes), 5):
+
+            #Se o CPF for igual a chave...
             if clientes[x] == chave + '\n':
                 campo = input("[1] CPF\n[2] Nome\n[3] Data de nascimento\n[4] Telefone\n[5] Email\n[0] Voltar\n\nQual campo deseja alterar: ")
                 novo = input("\nDigite o novo valor: ")
 
+                #Escrever no arquivo...
                 with open('dbclientes.txt', 'w', encoding="utf8") as dbp:
                     def escrever():
                         for y in clientes:
@@ -120,8 +131,9 @@ def alterarCliente():
                             print("\nCampo inválido!\n")
                             escrever()
                             break
-
-            elif x == len(clientes) - 1 and clientes[x] != chave + '\n':
+            
+            #Se o cliente não existir no banco...
+            elif x == 0 and chave + "\n" not in clientes:
                     print("\nEsse cliente não está cadastrado no banco de dados!\n")
                     time.sleep(3)
                     continue
@@ -131,20 +143,30 @@ def alterarCliente():
             break                    
 
 
+#Exclusão de cliente
 def excluirCliente():
     while True:
         dbprodutos.limpaTerminal()
 
+        #Lista de clientes
         chave = input("Digite o CPF: ")
 
+        #Lista de clientes
         with open('dbclientes.txt', 'r', encoding="utf8") as dbp:
             clientes = dbp.readlines()
         dbp.close()
          
+        #for para percorrer a lista de cliente de 5 em 5, assim pega só CPF
         for x in range(0, len(clientes), qtd_cli):
+
+            #Se o CPF for igual ao digitado...
             if clientes[x] == chave + '\n':
+
+                #Confirmando a exclusão
                 excluir = input(f"\nDeseja excluir o/a {clientes[x+1]} (s/n)? ").lower()
                 if excluir == 's':
+
+                    #Escrevendo lista sem o cliente apagado no arquivo
                     with open('dbclientes.txt', 'w', encoding="utf8") as dbp:
                         del(clientes[x:x+5])
                         print("\nCliente excluído!\n")
@@ -155,7 +177,8 @@ def excluirCliente():
                 break
 
             else:
-                if x == len(clientes):
+                #Se o cliente não existir no banco...
+                if x == 0 and chave + "\n" not in clientes:
                     print("\nEsse Cliente não está cadastrado no banco de dados!\n")
                     time.sleep(3)
                     continue
