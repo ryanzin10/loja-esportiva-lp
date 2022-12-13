@@ -28,6 +28,7 @@ while True:
                 break
             else:
                 print('Opção inválida!')
+                time.sleep(3)
 
     #Produto
     elif options == '2':
@@ -62,10 +63,26 @@ while True:
     #CLiente
     elif options == '3':
         while True:
-            optionCliente = input('\n=======================\n[1] Consultar cliente\n[2] Cadastrar cliente\n[3] Alterar cliente\n[3] Excluir cliente\n[0] Voltar\n=======================\nOpção desejada: ')
+            optionCliente = input('\n=======================\n[1] Consultar cliente\n[2] Cadastrar cliente\n[3] Alterar cliente\n[4] Excluir cliente\n[0] Voltar\n=======================\nOpção desejada: ')
 
-            if optionCliente == '2':
+            if optionCliente == '1':
+                dbclientes.consultarCliente()
+
+            elif optionCliente == '2':
                 dbclientes.cadastrarCliente()
+
+            elif optionCliente == '3':
+                dbclientes.alterarCliente()
+
+            elif optionCliente == '4':
+                dbclientes.excluirCliente()
+
+            elif optionCliente == '0':
+                break
+
+            else:
+                print("Opção inválida!")
+                time.sleep(3)
 
     #Sair
     elif options == '0':

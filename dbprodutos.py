@@ -119,11 +119,10 @@ def consultarProduto():
             #Percorrendo lista
             for x in range(0, len(produtos), qtd_prod):
                 #Encontrando código de barras digitado pelo usuário
-                
                 if produtos[x] == chave + '\n':
                     print(f"\nNome: {produtos[x+1]}Descrição: {produtos[x+2]}Preço: {produtos[x+3]}Quantidade em estoque: {produtos[x+4]}Código de barras: {produtos[x]}")
-                    
                     break
+
                 #Caso o código digitado não exista no banco
                 elif x == len(produtos) - 1:
                     print("\nEsse produto não está cadastrado no banco de dados!\n")
@@ -158,7 +157,8 @@ def excluirProduto():
                 dbp.close()
                 break
 
-            elif x == len(produtos) - 1:
+            else:
+                if x == len(produtos):
                     print("\nEsse produto não está cadastrado no banco de dados!\n")
                     time.sleep(3)
                     continue
@@ -187,12 +187,14 @@ def addCarrinho():
                 for z in range(unidades):
                     for y in range(len(produto)):
                         carrinho.append(produtos[x+y])
-        print(carrinho)
+
+        for x in range(1, len(carrinho), 5):
+            print("\n", carrinho[x], end="")
+
         novo = input('\nAdicionar outro produto (s/n)? ').lower()
         if novo == 'n': 
             break
                     
-
 
 
 def verCarrinho():
@@ -201,8 +203,8 @@ def verCarrinho():
 
         print("Produtos no carrinho:\n\n")
 
-        for x in carrinho:
-            print(x, end="")
+        for x in range(1, len(carrinho), 5):
+            print(carrinho[x])
 
         voltar = input('\nVolte pressionando enter: ').lower()
         if voltar == '': 
@@ -213,18 +215,17 @@ def vender():
     while True:
         limpaTerminal()
 
+        
         with open('dbprodutos.txt', 'r', encoding="utf8") as dbp:
             produtos = dbp.readlines()
         dbp.close()
-
-        print(produtos)
 
         finalizar = input("Finalizar compra (s/n)? ")
         if finalizar == 's':
             preco = 0
             for x in range(0, len(carrinho), qtd_prod):
                 qtd = carrinho.count(carrinho[x])
-                preco = preco + (float(carrinho[x+3]) * qtd)
+                preco = preco + (float(carrinho[x+3]))
                 estoque = int(carrinho[x+4]) - qtd
                 carrinho[x+4] = str(estoque) + "\n"
 
@@ -237,8 +238,13 @@ def vender():
                     for i in produtos:
                         dbp.write(i)
                 dbp.close()
-            print("Compra finalizada!")
-            time.sleep(3)
-            break
+
+            for x in range(1, len(carrinho), 5):
+                print("\n", carrinho[x], end="")
+            print(f"\n\nPreço: {preco}\n\nCompra finalizada!\n")
+            
+            voltar = input('\nVolte pressionando enter: ').lower()
+            if voltar == '': 
+                break
         else:
             break    

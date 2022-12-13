@@ -10,16 +10,43 @@ cliente = {
 
 qtd_cli = len(cliente)
 
+
+#Consulta de Cliente
+def consultarCliente():
+    while True:
+        dbprodutos.limpaTerminal()
+        
+        chave = input("Digite o CPF: ") 
+
+        #Abrindo o arquivo em modo leitura
+        with open('dbclientes.txt', 'r', encoding='utf8') as dbp:
+            clientes = dbp.readlines() 
+            for x in range(0, len(clientes), qtd_cli):
+                if clientes[x] == chave + '\n':
+                    print(f"\nCPF: {clientes[x]}Nome: {clientes[x+1]}Data de nascimento: {clientes[x+2]}Telefone: {clientes[x+3]}Email: {clientes[x+4]}")
+                    break
+
+                #Caso o CPF digitado não exista no banco
+                elif x == len(clientes) - 1:
+                    print("\nEsse Cliente não está cadastrado no banco de dados!\n")
+                    
+            
+            novoCliente = input('Consultar novo Cliente (s/n)? ').lower()
+            if novoCliente == 'n': 
+                break
+        dbp.close()
+
+
 def cadastrarCliente():
     while True:
         dbprodutos.limpaTerminal()
 
-        #Adicionando valores aos atributos de produto
+        #Adicionando valores aos atributos de Cliente
         y = 0
         for x in cliente:
             cliente[x] = input(x + ': ')
 
-            with open("dbprodutos.txt", "r", encoding="utf8") as dbp:
+            with open("dbclientes.txt", "r", encoding="utf8") as dbp:
                 clientes = dbp.readlines()
             dbp.close()
 
@@ -36,12 +63,12 @@ def cadastrarCliente():
         if novoCliente == 'n':
             break
 
-    #Alteração de produto
+    #Alteração de Cliente
 def alterarCliente():
     while True:
         dbprodutos.limpaTerminal()
 
-        chave = input("Digite o código de barras: ")
+        chave = input("Digite o CPF: ")
 
         with open('dbclientes.txt', 'r', encoding="utf8") as dbp:
             clientes = dbp.readlines()
@@ -65,7 +92,7 @@ def alterarCliente():
                             escrever()
                             break
 
-                        if campo == '2':
+                        elif campo == '2':
                             clientes[x+1] = novo + '\n'
                             print("\nNome alterado!\n")
                             escrever()
@@ -95,10 +122,44 @@ def alterarCliente():
                             break
 
             elif x == len(clientes) - 1 and clientes[x] != chave + '\n':
-                    print("\nEsse produto não está cadastrado no banco de dados!\n")
+                    print("\nEsse cliente não está cadastrado no banco de dados!\n")
                     time.sleep(3)
                     continue
             
-        novaAlt = input('ALterar novo produto (s/n)? ').lower()
+        novaAlt = input('ALterar novo cliente (s/n)? ').lower()
         if novaAlt == 'n': 
             break                    
+
+
+def excluirCliente():
+    while True:
+        dbprodutos.limpaTerminal()
+
+        chave = input("Digite o CPF: ")
+
+        with open('dbclientes.txt', 'r', encoding="utf8") as dbp:
+            clientes = dbp.readlines()
+        dbp.close()
+         
+        for x in range(0, len(clientes), qtd_cli):
+            if clientes[x] == chave + '\n':
+                excluir = input(f"\nDeseja excluir o/a {clientes[x+1]} (s/n)? ").lower()
+                if excluir == 's':
+                    with open('dbclientes.txt', 'w', encoding="utf8") as dbp:
+                        del(clientes[x:x+5])
+                        print("\nCliente excluído!\n")
+                        for y in clientes:
+                            dbp.write(y)
+                        break
+                dbp.close()
+                break
+
+            else:
+                if x == len(clientes):
+                    print("\nEsse Cliente não está cadastrado no banco de dados!\n")
+                    time.sleep(3)
+                    continue
+
+        novaAlt = input('Excluir outro cliente (s/n)? ').lower()
+        if novaAlt == 'n': 
+            break
