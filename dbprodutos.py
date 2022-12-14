@@ -1,4 +1,4 @@
-import os, time
+import os
 
 produto = {
         "Código de barras": "",
@@ -192,9 +192,9 @@ carrinho = []
 #Preço dos produtos no carrinho
 def verPreco():
     preco = 0
-    for x in range(3, len(carrinho), 5):
+    for x in range(3, len(carrinho), qtd_prod):
         preco = preco + (float(carrinho[x]))
-    print(f"\nPreço: R${preco}")
+    print(f"\nPreço: R${preco:.2f}")
 
 #Adicionando produtos no carrinho
 def addCarrinho():
@@ -230,8 +230,8 @@ def addCarrinho():
         #Mostrando nomes que contém no carrinho atualizado
         for x in range(1, len(carrinho), qtd_prod):
             print("\n", " ".join(carrinho[x].split()))
-
         verPreco()
+
         novo = input('\nAdicionar outro produto (s/n)? ').lower()
         if novo == 'n': 
             break
@@ -292,7 +292,7 @@ def vender():
                 dbp.close()
             
             print(f"\nCompra finalizada!\n")
-            
+            carrinho.clear()
             voltar = input('Volte pressionando enter: ').lower()
             if voltar == '': 
                 break

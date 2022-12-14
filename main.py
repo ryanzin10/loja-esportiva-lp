@@ -2,6 +2,7 @@ import dbclientes, dbprodutos, time
 
 while True:
     dbprodutos.limpaTerminal()
+    
     #Menu
     options = input('=======================\n[1] Venda\n[2] Produto\n[3] Cliente\n[0] Sair\n=======================\nOpção desejada: ')
 

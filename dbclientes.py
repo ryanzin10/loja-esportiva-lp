@@ -164,7 +164,7 @@ def excluirCliente():
             if clientes[x] == chave + '\n':
 
                 #Confirmando a exclusão
-                excluir = input(f"\nDeseja excluir o/a {clientes[x+1]} (s/n)? ").lower()
+                excluir = input(f"\nDeseja excluir o/a {' '.join(clientes[x+1].split())} (s/n)? ").lower()
                 if excluir == 's':
 
                     #Escrevendo lista sem o cliente apagado no arquivo
